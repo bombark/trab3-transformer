@@ -23,7 +23,8 @@ for _line in raw.split('\n'):
     y_real.append( int(line[50]) )
 
 # Divide em treino e teste
-x_train, x_test, y_train, y_test = train_test_split(x_data, y_real, test_size=0.33, random_state=42)
+x_train, x_test, y_train, y_test = train_test_split(x_data, y_real, test_size=0.30)
+print(len(x_train), len(x_test))
 
 # Cria o SVM, treina e classifica
 print("Treinando")
@@ -42,7 +43,7 @@ clf_nn = MLPClassifier (
     epsilon=1e-05, n_iter_no_change=10, max_fun=15000
     )
 
-clf = clf_nn
+clf = clf_svc
 
 
 clf.fit(x_train, y_train)
@@ -52,8 +53,8 @@ y_pred = clf.predict(x_test)
 
 # print(y_test)
 for i in range(len(y_pred)):
-    print(y_pred[i])
-
+    print(y_pred[i], end=", ")
+print()
 
 # Mostra o resultado
 print(classification_report(y_test, y_pred))
